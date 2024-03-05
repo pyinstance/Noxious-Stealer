@@ -21,10 +21,10 @@ Due to constant Discord terminations I will not be making a new support server. 
     -   🟢 All Tokens
     -   🟢 Kill Discord
     
--   System info
+-   System info / Misc
     -   🟢 User
     -   🟢 WiFi
-    -   :orange_circle: Screenshot
+    -   🟢 Screenshot ( date added // 5/3/24 )
 
 -    IP INFO
      - 🟢 IP lookup
