@@ -57,9 +57,6 @@ Due to constant Discord terminations I will not be making a new support server. 
 2. After everything and its finished compiling goto the dir called 'dist' and the executable compiled should be thier
 9. https://t.me/+HyVCbHaErR1lYTlk
 
-<div align="center">
-    <img style="border-radius: 15px; display: block; margin-left: auto; margin-right: auto; margin-bottom:20px;" width="70%" src="assets/image.png"></img>
-</div>
 
 <img src="https://i.imgur.com/KDriHPw.png">
 <img src="https://i.imgur.com/mdJhwZD.png">
