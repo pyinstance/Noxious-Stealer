@@ -39,12 +39,6 @@ Due to constant Discord terminations I will not be making a new support server. 
     - :red_circle:Browser Stealing
     - :orange_circle: Self Destruct 
 
--    IP INFO
-     - IP lookup
-     - City
-     - org
-     - ect
-
 ### Prerequisites
 
 -   Windows 10/11
