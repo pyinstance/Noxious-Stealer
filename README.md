@@ -24,7 +24,8 @@ Due to constant Discord terminations I will not be making a new support server. 
 -   System info / Misc
     -   🟢 User
     -   🟢 WiFi
-    -   🟢 Screenshot ( date added // 5/3/24 )
+    -   🟢 Screenshot ( date added : 5/3/24 )
+    -   🟢 Self Destruct ( Date Added : 5/3/24 )
 
 -    IP INFO
      - 🟢 IP lookup
