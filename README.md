@@ -54,6 +54,7 @@ Due to constant Discord terminations I will not be making a new support server. 
 
 <img src="https://i.imgur.com/KDriHPw.png">
 <img src="https://i.imgur.com/mdJhwZD.png">
+<img src="https://i.imgur.com/e2EVnNs.png">
 
 
 -   Any Bugs Please Join the [Tele](https://t.me/+HyVCbHaErR1lYTlk)
