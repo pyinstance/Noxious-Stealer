@@ -29,7 +29,7 @@ def main():
 {m} ▀█   █▀   ▀██████▀  ████       ███▄ █▀    ▀██████▀  ████████▀   ▄████████▀  
                                                                             
                                                                            
-                        Developer ; Veal
+                        Developer ; Resentful
                         Verison ; 1.1.1{rs}
     """)
 
@@ -55,7 +55,7 @@ def main():
 {m} ▀█   █▀   ▀██████▀  ████       ███▄ █▀    ▀██████▀  ████████▀   ▄████████▀  
                                                                              
                                                                            
-                        Developer ; Veal
+                        Developer ; Resentful
                         Verison ; 1.1.1{rs}
     """)
     print(f"{datetime.datetime.now()}   [ {y}PROGRAM {w}| {y}CHECK {w}] Checking for Noxious file")
