@@ -26,6 +26,7 @@ Due to constant Discord terminations I will not be making a new support server. 
     -   🟢 WiFi
     -   🟢 Screenshot ( date added : 5/3/24 )
     -   🟢 Self Destruct ( Date Added : 5/3/24 )
+    -   🟢 Browser Stealing
 
 -    IP INFO
      - 🟢 IP lookup
@@ -37,7 +38,6 @@ Due to constant Discord terminations I will not be making a new support server. 
 ## External Features To Add
 -    Things to come
     - :orange_circle: Obfuscation ( Coming Soon )
-    - :red_circle:Browser Stealing
     - :orange_circle: Self Destruct 
 
 ### Prerequisites
