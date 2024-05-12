@@ -17,7 +17,7 @@ Due to constant Discord terminations I will not be making a new support server. 
     -   🟢 Billing
     -   🟢 Email
     -   🟢 Phone
-    -   :orange_circle: Injection
+    -   🟠 Injection
     -   🟢 All Tokens
     -   🟢 Kill Discord
     
@@ -32,13 +32,23 @@ Due to constant Discord terminations I will not be making a new support server. 
      - 🟢 IP lookup
      - 🟢 City
      - 🟢 org
-     - 🟢 ect    
+     - 🟢 ect
 
+-    Anti Debug Features
+     - 🟢 Anti Virus Total
+     - 🟠 Anti Skid
+     -
+-    Standard Features
+     - 🟠 Startup
+     - 🟠 Wallet Stealing
+     - 🟠 Spread
+     - 🟠 Webhook Protection
+  
 
 ## External Features To Add
 -    Things to come
-    - :orange_circle: Obfuscation ( Coming Soon )
-    - :orange_circle: Self Destruct 
+    - 🟠 Obfuscation ( Coming Soon )
+    - 🟠 Self Destruct 
 
 ### Prerequisites
 
