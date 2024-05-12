@@ -35,7 +35,7 @@ Due to constant Discord terminations I will not be making a new support server. 
      - 🟢 ect
 
 -    Anti Debug Features
-     - 🟢 Anti Virus Total
+     - 🟢 Anti Virus Total [6nz](https://github.com/6nz/virustotal-vm-blacklist)
      - 🟠 Anti Skid
      -
 -    Standard Features
